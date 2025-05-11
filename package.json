@@ -1,0 +1,25 @@
+{
+  "name": "workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter workspace-web dev\" \"pnpm --filter workspace-server start:dev\"",
+    "build": "pnpm run --parallel build:web build:server",
+    "build:web": "pnpm --filter workspace-web build",
+    "build:server": "pnpm --filter workspace-server build"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^6.0.0",
+    "@sveltejs/kit": "^2.20.8",
+    "concurrently": "^9.1.2",
+    "svelte": "^5.28.2",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@nestjs/typeorm": "^11.0.0",
+    "pg": "^8.15.6",
+    "typeorm": "^0.3.23"
+  }
+}
