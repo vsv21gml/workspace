@@ -75,41 +75,46 @@ function ResourceList() {
         </Link>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
-              <TableHead className="w-[180px]">키</TableHead>
-              <TableHead className="w-[100px]">CPU</TableHead>
-              <TableHead className="w-[100px]">메모리</TableHead>
-              <TableHead className="w-[150px]">라벨</TableHead>
-              <TableHead>설명</TableHead>
-              <TableHead className="w-[120px]">네임스페이스</TableHead>
-              <TableHead className="w-[120px]">Ingress 클래스</TableHead>
-              <TableHead className="w-[150px]">생성일</TableHead>
-              <TableHead className="w-[150px]">수정일</TableHead>
-              <TableHead className="w-[100px] text-center">작업</TableHead>
+            <TableRow className="bg-gray-100 hover:bg-gray-100 border-b-2 border-gray-200">
+              <TableHead className="w-[100px] py-4 text-gray-700 font-semibold border-r border-gray-200">CPU</TableHead>
+              <TableHead className="w-[100px] py-4 text-gray-700 font-semibold border-r border-gray-200">메모리</TableHead>
+              <TableHead className="w-[150px] py-4 text-gray-700 font-semibold border-r border-gray-200">라벨</TableHead>
+              <TableHead className="py-4 text-gray-700 font-semibold border-r border-gray-200">설명</TableHead>
+              <TableHead className="w-[120px] py-4 text-gray-700 font-semibold border-r border-gray-200">네임스페이스</TableHead>
+              <TableHead className="w-[120px] py-4 text-gray-700 font-semibold border-r border-gray-200">Ingress 클래스</TableHead>
+              <TableHead className="w-[150px] py-4 text-gray-700 font-semibold border-r border-gray-200">생성일</TableHead>
+              <TableHead className="w-[150px] py-4 text-gray-700 font-semibold border-r border-gray-200">수정일</TableHead>
+              <TableHead className="w-[100px] py-4 text-center text-gray-700 font-semibold">작업</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {resources.map((resource) => (
-              <TableRow key={resource.id} className="hover:bg-gray-50">
-                <TableCell className="font-medium">{resource.key}</TableCell>
-                <TableCell>{resource.cpu}</TableCell>
-                <TableCell>{resource.memory}</TableCell>
-                <TableCell>{resource.label || '-'}</TableCell>
-                <TableCell className="max-w-[200px] truncate">{resource.description || '-'}</TableCell>
-                <TableCell>{resource.namespace}</TableCell>
-                <TableCell>{resource.ingressClass}</TableCell>
-                <TableCell>{new Date(resource.created_at).toLocaleString()}</TableCell>
-                <TableCell>{new Date(resource.updated_at).toLocaleString()}</TableCell>
-                <TableCell>
+            {resources.map((resource, index) => (
+              <TableRow 
+                key={resource.id} 
+                className={`hover:bg-gray-50 transition-colors duration-150 ${
+                  index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                } ${
+                  index !== resources.length - 1 ? 'border-b border-gray-200' : ''
+                }`}
+              >
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{resource.cpu}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{resource.memory}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{resource.label || '-'}</TableCell>
+                <TableCell className="py-4 text-gray-700 max-w-[200px] truncate border-r border-gray-200">{resource.description || '-'}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{resource.namespace}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{resource.ingressClass}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{new Date(resource.created_at).toLocaleString()}</TableCell>
+                <TableCell className="py-4 text-gray-700 border-r border-gray-200">{new Date(resource.updated_at).toLocaleString()}</TableCell>
+                <TableCell className="py-4">
                   <div className="flex justify-center space-x-2">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(resource.id)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300 transition-colors duration-150"
                     >
                       삭제
                     </Button>
